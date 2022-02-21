@@ -29,14 +29,14 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|max:255',
+            'nombre' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'contraseña' => 'required|min:6|confirmed',
         ];
         $messages = [
             'required' => 'El campo :attribute es obligatorio.',
             'email.required' => 'El campo correo no tiene el formato adecuado.',
-            'password' => 'La contraseña es campo obligatorio',
+            'contraseña' => 'La contraseña es campo obligatorio',
         ];
         $validatedData = $request->validate($rules, $messages);
         $validatedData['password'] = bcrypt($validatedData['password']);
