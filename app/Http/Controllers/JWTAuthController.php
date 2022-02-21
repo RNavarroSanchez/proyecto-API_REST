@@ -30,7 +30,7 @@ public function register(Request $request)
 {
 $rules = [
 'nombre' => 'required|between:2,100',
-'email' => 'required|email|unique:users,email',
+'email' => 'required|email|unique:usuarios,email',
 'contraseña' => 'required|min:6|string|confirmed',
 ];
 $messages = [

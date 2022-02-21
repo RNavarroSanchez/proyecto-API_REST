@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'api',
-        'passwords' => 'users',
+        'contraseña' => 'users',
     ],
 
     /*
@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'Usuario',
+            'provider' => 'users',
         ],
 
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'Usuarios',
+            'provider' => 'users',
             'hash' => false,
         ],
     ],
