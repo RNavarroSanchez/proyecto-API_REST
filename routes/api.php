@@ -21,3 +21,17 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('usuarios', 'Usuario\UsuarioController');
 Route::apiResource('libros','Libro\LibroController');
 Route::apiResource('prestamos','Prestamo\PrestamoController');
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('register', 'JWTAuthController@register');
+    Route::post('login', 'JWTAuthController@login');
+    Route::post('logout', 'JWTAuthController@logout');
+    Route::post('refresh', 'JWTAuthController@refresh');
+    Route::get('profile', 'JWTAuthController@profile');
+
+}); 
