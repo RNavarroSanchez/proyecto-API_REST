@@ -65,14 +65,14 @@ class UsuarioController extends Controller
     public function update(Request $request, Usuario $usuario)
     {
         $rules = [
-            'name' => 'min:5|max:255',
-            'email' => ['email', Rule::unique('users')->ignore($usuario->id)],
-            'password' => 'min:6', // si no hacemos ninguna validacion para este, debemos ponerle '' aunque sea para tenerlo disponible en la vista
+            'nombre' => 'min:5|max:255',
+            'email' => ['email', Rule::unique('usuarios')->ignore($usuario->id)],
+            'contraseña' => 'min:6', // si no hacemos ninguna validacion para este, debemos ponerle '' aunque sea para tenerlo disponible en la vista
         ];
         $validatedData = $request->validate($rules);
 
-        if ($request->filled('password')){
-            $validatedData['password'] = bcrypt($request->input('password'));
+        if ($request->filled('contraseña')){
+            $validatedData['contraseña'] = bcrypt($request->input('contraseña'));
         }
 
         $usuario->fill($validatedData);

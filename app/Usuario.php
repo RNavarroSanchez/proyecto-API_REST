@@ -26,7 +26,7 @@ class Usuario extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'contraseña', 
+         'contraseña', 
     ];
 
     /**
@@ -38,7 +38,7 @@ class Usuario extends Authenticatable implements JWTSubject
     ]; 
 
     public function libros(){
-        return $this->belongsToMany(Libro::class);
+        return $this->belongsTo(Libro::class);
     }
 
     /**
