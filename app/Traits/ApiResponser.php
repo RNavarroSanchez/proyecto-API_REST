@@ -21,17 +21,22 @@ trait ApiResponser
 
     function showAll($collection, $code = 200)
     {
+
         if($collection->isEmpty()){
             return $this->successResponse(['data' => $collection], $code);
         }
     
         $collection = $this->paginateCollection($collection);
-        
+            $transformer = $collection->first()->transformer;
+            $collection = $this->transformData($collection, $transformer);
+
         return $this->successResponse(['data' => $collection], $code);
     }
     
     function showOne(Model $instance, $code = 200)
     {
+        $transformer = $instance->transformer;
+        $instance = $this->transformData($instance, $transformer);
         return $this->successResponse(['data' => $instance], $code);
     }
 
@@ -58,5 +63,9 @@ trait ApiResponser
         ]);
         $paginated->appends(request()->all());
         return $paginated;
+    }
+    protected function transformData($data, $transformer) {
+        $transformation = fractal($data,new $transformer);
+        return $transformation->toArray();
     }
 }

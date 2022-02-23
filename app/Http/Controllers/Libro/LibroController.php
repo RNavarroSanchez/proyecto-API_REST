@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Libro;
 use App\Libro;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transformers\LibroTransformer;
+
 
 class LibroController extends Controller
 {
+    public function __construct(){
+        $this->middleware('transform.input:' . LibroTransformer::class)->only(['store', 'update']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +65,7 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
+        
         $rules = [
             'titulo' => 'required|max:255|unique:libros',
             'descripcion' => 'required|max:1000',

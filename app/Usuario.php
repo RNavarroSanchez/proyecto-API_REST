@@ -3,13 +3,16 @@
 namespace App;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Transformers\UsuarioTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable; 
+
+    public $transformer = UsuarioTransformer::class;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +22,7 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $fillable = [
         'nombre', 'email', 'contraseña',
     ];
+    
 
     /**
      * The attributes that should be hidden for arrays.

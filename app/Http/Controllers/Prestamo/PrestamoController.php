@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 class PrestamoController extends Controller
 {
+    // public function __construct(){
+    //     $this->middleware('transform.input'.UsuarioTransformer::class)->only(['store','update']);
+    // }
+
     /**
      * Display a listing of the resource.
      *

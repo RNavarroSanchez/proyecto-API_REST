@@ -6,9 +6,13 @@ use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Transformers\UsuarioTransformer;
 
 class UsuarioController extends Controller
 {
+    public function __construct(){
+        $this->middleware('transform.input:' . UsuarioTransformer::class)->only(['store', 'update']);
+    }
     /**
      * Display a listing of the resource.
      *
