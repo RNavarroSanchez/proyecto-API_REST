@@ -61,15 +61,21 @@ class LibroController extends Controller
     public function update(Request $request, Libro $libro)
     {
         $rules = [
-            'titulo' => 'required|max:255|unique:titulo',
+            'titulo' => 'required|max:255|unique:libros',
             'descripcion' => 'required|max:1000',
         ];
-        $validatedData = $request->validate($rules);
+        $messages = [
+            'titulo.unique' => 'El titulo del libro ya existe',
+            'required' => 'El :attribute es requerido'
+        ];
+        
+        $validatedData = $request->validate($rules,$messages);
+     
 
         $libro->fill($validatedData);
 
         if(!$libro->isDirty()){
-            return response()->json(['error'=>['code' => 422, 'message' => 'please specify at least one different value' ]], 422);
+            return response()->json(['error'=>['code' => 422, 'message' => 'Por favor escribe un valor diferente' ]], 422);
         }
         $libro->save();
         return $this->showOne($libro);

@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     {
         $rules = [
             'nombre' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:usuarios,email',
             'contraseña' => 'required|min:6|confirmed',
         ];
         $messages = [
@@ -39,7 +39,7 @@ class UsuarioController extends Controller
             'contraseña' => 'La contraseña es campo obligatorio',
         ];
         $validatedData = $request->validate($rules, $messages);
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['contraseña'] = bcrypt($validatedData['contraseña']);
         $user = Usuario::create($validatedData);
         return $this->showOne($user,201);
     }
