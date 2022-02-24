@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         Libro::truncate();
         Usuario::truncate();
-        DB::table('prestamos')->truncate();
+        DB::table('libro_usuario')->truncate();
 
         //crea 1000 usuarios
         $this->call(UsuarioSeeder::class); 
@@ -30,19 +30,21 @@ class DatabaseSeeder extends Seeder
         $cantLibros = 100;
         factory(Libro::class,$cantLibros)->create();
 
+        //crea 30 prestamos
         $cantPrestamos=30;
 
         for ($i=0; $i<$cantPrestamos;$i++)
         {
-            $usuario = Usuario::all()->random()->id;
+            $usuario = Usuario::all()->random();
             $libro = Libro::all()->random()->id;
-                DB::table('prestamos')->insert(
-                    [
-                        'id_libro' => $libro,
-                        'id_usuario'=> $usuario,
-                        'created_at' =>now(),
-                    ]
-                );
+                // DB::table('prestamos')->insert(
+                //     [
+                //         'id_libro' => $libro,
+                //         'id_usuario'=> $usuario,
+                //         'created_at' =>now(),
+                //     ]
+                // );
+                $usuario->libros()->attach($libro);
         }
 
 

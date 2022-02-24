@@ -35,15 +35,15 @@ class UsuarioController extends Controller
         $rules = [
             'nombre' => 'required|max:255',
             'email' => 'required|email|unique:usuarios,email',
-            'contraseña' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed',
         ];
         $messages = [
             'required' => 'El campo :attribute es obligatorio.',
             'email.required' => 'El campo correo no tiene el formato adecuado.',
-            'contraseña' => 'La contraseña es campo obligatorio',
+            'password' => 'La password es campo obligatorio',
         ];
         $validatedData = $request->validate($rules, $messages);
-        $validatedData['contraseña'] = bcrypt($validatedData['contraseña']);
+        $validatedData['password'] = bcrypt($validatedData['password']);
         $user = Usuario::create($validatedData);
         return $this->showOne($user,201);
     }
@@ -71,12 +71,12 @@ class UsuarioController extends Controller
         $rules = [
             'nombre' => 'min:5|max:255',
             'email' => ['email', Rule::unique('usuarios')->ignore($usuario->id)],
-            'contraseña' => 'min:6', // si no hacemos ninguna validacion para este, debemos ponerle '' aunque sea para tenerlo disponible en la vista
+            'password' => 'min:6', // si no hacemos ninguna validacion para este, debemos ponerle '' aunque sea para tenerlo disponible en la vista
         ];
         $validatedData = $request->validate($rules);
 
-        if ($request->filled('contraseña')){
-            $validatedData['contraseña'] = bcrypt($request->input('contraseña'));
+        if ($request->filled('password')){
+            $validatedData['password'] = bcrypt($request->input('password'));
         }
 
         $usuario->fill($validatedData);
