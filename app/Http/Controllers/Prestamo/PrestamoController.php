@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Prestamo;
 
+use App\Libro;
+use App\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,9 +18,10 @@ class PrestamoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Usuario $usuario)
     {
-        //
+        $prestamos = $usuario->libros;
+        return $this->showAll($prestamos);
     }
 
     /**
@@ -48,9 +51,13 @@ class PrestamoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Usuario $usuario)
     {
-        //
+        // if( !$usuario->libros()->find($libro->id)){
+        //     return $this->errorResponse('Este usuario no tiene prestado ese libro',404);
+        // }
+        // $prestamos = $usuario->libros;
+        // return $this->showAll($prestamos);
     }
 
     /**
@@ -82,8 +89,13 @@ class PrestamoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Usuario $usuario, Libro $libro)
     {
-        //
+        if( !$usuario->libros()->find($libro->id)){
+            return $this->errorResponse('Este usuario no tiene prestado ese libro',404);
+        }
+        $usuario->libros()->detach($libro->id);
+        return $this->showAll($usuario->libros);
+
     }
 }

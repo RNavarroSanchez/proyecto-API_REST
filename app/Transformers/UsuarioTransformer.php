@@ -68,6 +68,7 @@ class UsuarioTransformer extends TransformerAbstract
             'correo' => 'email',
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
+            
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
@@ -77,6 +78,7 @@ class UsuarioTransformer extends TransformerAbstract
             'email' => 'correo',
             'created_at' => 'fechaCreacion', 
             'updated_at' => 'fechaActualizacion',
+            
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
