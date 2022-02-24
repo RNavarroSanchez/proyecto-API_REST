@@ -13,15 +13,15 @@ class CreatePrestamos extends Migration
      */
     public function up()
     {
-        Schema::create('prestamos', function (Blueprint $table) {
+        Schema::create('libro_usuario', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_libro')->unsigned();
-            $table->integer('id_usuario')->unsigned();
+            $table->integer('libro_id')->unsigned();
+            $table->integer('usuario_id')->unsigned();
             $table->timestamps();
-            $table->foreign('id_libro')
+            $table->foreign('libro_id')
                     ->references('id')
                     ->on('libros');
-            $table->foreign('id_usuario')
+            $table->foreign('usuario_id')
                     ->references('id')
                     ->on('usuarios');
         });

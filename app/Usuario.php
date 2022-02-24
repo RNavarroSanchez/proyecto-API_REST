@@ -38,7 +38,7 @@ class Usuario extends Authenticatable implements JWTSubject
     ]; 
 
     public function libros(){
-        return $this->belongsTo(Libro::class);
+        return $this->belongsToMany(Libro::class);
     }
 
     /**

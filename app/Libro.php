@@ -11,7 +11,7 @@ class Libro extends Model
     ];
 
     public function Usuarios(){
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsToMany(Usuario::class);
     }
 
 }

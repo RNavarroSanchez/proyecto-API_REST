@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Usuario;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use Validator;
+use Illuminate\Http\Request;
+use App\Usuario;
 
 class JWTAuthController extends Controller
 {
@@ -60,11 +60,14 @@ if ($validator->fails()) {
 return response()->json($validator->errors(), 422);
 }
 
-if (! $token = auth()->attempt($validator->validated())) {
+
+if (! $token = Auth::attempt($validator->validated())) {
+   
 return response()->json(['error' => 'Unauthorized'], 401);
 }
-
+dd(createNewToken($token));
 return $this->createNewToken($token);
+
 }
 
 /**
