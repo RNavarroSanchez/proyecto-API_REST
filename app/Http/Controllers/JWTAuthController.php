@@ -31,15 +31,15 @@ public function register(Request $request)
 $rules = [
 'nombre' => 'required|between:2,100',
 'email' => 'required|email|unique:usuarios,email',
-'contraseña' => 'required|min:6|string|confirmed',
+'password' => 'required|min:6|string|confirmed',
 ];
 $messages = [
 'required' => 'El campo :attribute es obligatorio.',
 'email.email' => 'El campo correo no tiene el formato adecuado.',
-'contraseña' => 'La contraseña es campo obligatorio',
+'password' => 'La password es campo obligatorio',
 ];
 $validatedData = $request->validate($rules, $messages);
-$validatedData['contraseña'] = bcrypt($validatedData['contraseña']);
+$validatedData['password'] = bcrypt($validatedData['password']);
 $user = Usuario::create($validatedData);
 return $this->showOne($user,201);
 }
@@ -53,7 +53,7 @@ return $this->showOne($user,201);
     {
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'contraseña' => 'required|string|min:6',
+            'password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
