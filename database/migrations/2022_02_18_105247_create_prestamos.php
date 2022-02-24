@@ -20,10 +20,10 @@ class CreatePrestamos extends Migration
             $table->timestamps();
             $table->foreign('libro_id')
                     ->references('id')
-                    ->on('libros');
+                    ->on('libros')->onDelete('cascade');
             $table->foreign('usuario_id')
                     ->references('id')
-                    ->on('usuarios');
+                    ->on('usuarios')->onDelete('cascade');
         });
     }
 

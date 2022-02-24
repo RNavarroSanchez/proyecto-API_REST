@@ -20,18 +20,9 @@ class PrestamoController extends Controller
      */
     public function index(Usuario $usuario)
     {
-        $prestamos = $usuario->libros;
-        return $this->showAll($prestamos);
-    }
+        $prestamos = $usuario->libros();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->showAll($prestamos);
     }
 
     /**
@@ -53,24 +44,14 @@ class PrestamoController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        // if( !$usuario->libros()->find($libro->id)){
+        //  if( !$usuario->libros()->find($usuario->id)){
         //     return $this->errorResponse('Este usuario no tiene prestado ese libro',404);
         // }
         // $prestamos = $usuario->libros;
-        // return $this->showAll($prestamos);
+        // return $this->show($prestamos);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -78,9 +59,10 @@ class PrestamoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Usuario $usuario, Libro $libro )
     {
-        //
+        $usuario->libros()->syncWithoutDetaching($libro->id);
+        return $this->showAll($usuario->libros);
     }
 
     /**

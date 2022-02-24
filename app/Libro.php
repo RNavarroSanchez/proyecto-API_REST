@@ -14,7 +14,7 @@ class Libro extends Model
     ];
 
     public function Usuarios(){
-        return $this->belongsToMany(Usuario::class);
+        return $this->belongsToMany(Usuario::class)->withTimestamps();
     }
 
 }

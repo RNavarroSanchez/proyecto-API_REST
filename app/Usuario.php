@@ -42,7 +42,7 @@ class Usuario extends Authenticatable implements JWTSubject
     ]; 
 
     public function libros(){
-        return $this->belongsToMany(Libro::class);
+        return $this->belongsToMany(Libro::class)->withTimestamps();
     }
 
     /**
