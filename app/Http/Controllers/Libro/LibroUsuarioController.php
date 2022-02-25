@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Prestamo;
+namespace App\Http\Controllers\Libro;
 
 use App\Libro;
 use App\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PrestamoController extends Controller
+class LibroUsuarioController extends Controller
 {
-    // public function __construct(){
+  // public function __construct(){
     //     $this->middleware('transform.input'.UsuarioTransformer::class)->only(['store','update']);
     // }
 
     /**
      * Display a listing of the resource.
-     *
+     *@param  \App\Libros  $libro
      * @return \Illuminate\Http\Response
      */
-    public function index(Libro $libro, Usuario $usuario,Request $request)
+    public function index(Libro $libro)
     {
-        
-        $libro->usuarios()->find($usuario->id);
-
-        return $this->showAll($libro->usuarios);
+        $usuarios = $libro->usuarios;
+     
+        return $this->showAll($usuarios);
        
         
     }
