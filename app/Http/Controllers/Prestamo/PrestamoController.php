@@ -18,10 +18,10 @@ class PrestamoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Usuario $usuario)
+    public function index(Usuario $usuario, Libro $libro)
     {
-        $prestamos = $usuario->libros();
-
+        $prestamos = $usuario->libro();
+        
         return $this->showAll($prestamos);
     }
 
