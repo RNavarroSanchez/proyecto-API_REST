@@ -23,13 +23,10 @@ trait ApiResponser
     {
 
         if($collection->isEmpty()){
+            
             return $this->successResponse(['data' => $collection], $code);
         }
     
-        $collection = $this->paginateCollection($collection);
-            $transformer = $collection->first()->transformer;
-            $collection = $this->transformData($collection, $transformer);
-
         return $this->successResponse(['data' => $collection], $code);
     }
     
