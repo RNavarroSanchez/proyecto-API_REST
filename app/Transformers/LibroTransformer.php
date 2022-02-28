@@ -50,7 +50,7 @@ class LibroTransformer extends TransformerAbstract
             ],
             [
                 'rel' => 'self',
-                'metodo' => 'path',
+                'methodo' => 'path',
                 'href' => route('libros.update', $libro->id),
             ],
             [
