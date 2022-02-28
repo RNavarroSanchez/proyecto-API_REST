@@ -12,6 +12,21 @@ class LibroUsuarioController extends Controller
   // public function __construct(){
     //     $this->middleware('transform.input'.UsuarioTransformer::class)->only(['store','update']);
     // }
+
+    /**
+     * Display a listing of the resource.
+     *@param  \App\Libros  $libro
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Libro $libro)
+    {
+        $usuarios = $libro->usuarios;
+     
+        return $this->showAll($usuarios);
+       
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -20,8 +35,7 @@ class LibroUsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+        //
     }
 
     /**
@@ -32,11 +46,11 @@ class LibroUsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-         if( !$usuario->libros()->find($usuario->id)){
-            return $this->errorResponse('Este usuario no tiene prestado ese libro',404);
-        }
-        $prestamos = $usuario->libros;
-        return $this->show($prestamos);
+        //  if( !$usuario->libros()->find($usuario->id)){
+        //     return $this->errorResponse('Este usuario no tiene prestado ese libro',404);
+        // }
+        // $prestamos = $usuario->libros;
+        // return $this->show($prestamos);
     }
 
    

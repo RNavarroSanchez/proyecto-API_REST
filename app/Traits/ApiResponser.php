@@ -16,26 +16,24 @@ trait ApiResponser
     
     function errorResponse($message, $code)
     {
-        return response()->json(['error' => $message, 'code' => $code], $code);
+        return response()->json(['error' => ['message' => $message, 'code' => $code]], $code);
     }
 
     function showAll($collection, $code = 200)
     {
-        if($collection->isEmpty()) {
+
+        if($collection->isEmpty()){
+            
             return $this->successResponse(['data' => $collection], $code);
         }
-        $collection = $this->paginateCollection($collection);
-        //$transformer = $collection->first()->transformer;
-        //$collection = $this->transformData($collection, $transformer);
-
+    
         return $this->successResponse(['data' => $collection], $code);
     }
     
     function showOne(Model $instance, $code = 200)
     {
-       // $transformer = $instance->transformer;
-       // $instance = $this->transformData($instance, $transformer);
-
+        $transformer = $instance->transformer;
+        $instance = $this->transformData($instance, $transformer);
         return $this->successResponse(['data' => $instance], $code);
     }
 
@@ -43,7 +41,6 @@ trait ApiResponser
     {
         return $this->successResponse($message, $code);
     }
-
     function paginateCollection(Collection $collection){
         $rules = [
             'por_pagina' => 'integer|min:2|max:50'
