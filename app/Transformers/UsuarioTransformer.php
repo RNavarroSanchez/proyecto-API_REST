@@ -34,6 +34,7 @@ class UsuarioTransformer extends TransformerAbstract
     {
         return [
             'identificador' => (int)$usuario->id,
+            'correo' => (string)$usuario->email,
             'fechaCreacion' => (string)$usuario->created_at,
             'fechaActualizacion' => (string)$usuario->update_at,
             // 'links'=> [
@@ -46,12 +47,12 @@ class UsuarioTransformer extends TransformerAbstract
             // ],
             [
                 'rel' => 'self',
-                'methodo' => 'delete',
+                'metodo' => 'delete',
                 'href' => route('usuarios.destroy', $usuario->id),
             ],
             [
                 'rel' => 'self',
-                'methodo' => 'path',
+                'metodo' => 'path',
                 'href' => route('usuarios.update', $usuario->id),
             ],
             [
@@ -64,6 +65,7 @@ class UsuarioTransformer extends TransformerAbstract
     public static function originalAttribute($index, $attributes){
         $attributes = [
             'identificador' => 'id',
+            'correo' => 'email',
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
             
@@ -73,6 +75,7 @@ class UsuarioTransformer extends TransformerAbstract
     public static function transformedAttribute($index){
         $attributes = [
             'id' => 'identificador',
+            'email' => 'correo',
             'created_at' => 'fechaCreacion', 
             'updated_at' => 'fechaActualizacion',
             

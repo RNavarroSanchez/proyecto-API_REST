@@ -16,24 +16,26 @@ trait ApiResponser
     
     function errorResponse($message, $code)
     {
-        return response()->json(['error' => ['message' => $message, 'code' => $code]], $code);
+        return response()->json(['error' => $message, 'code' => $code], $code);
     }
 
     function showAll($collection, $code = 200)
     {
-
-        if($collection->isEmpty()){
-            
+        if($collection->isEmpty()) {
             return $this->successResponse(['data' => $collection], $code);
         }
-    
+        $collection = $this->paginateCollection($collection);
+        $transformer = $collection->first()->transformer;
+        $collection = $this->transformData($collection, $transformer);
+
         return $this->successResponse(['data' => $collection], $code);
     }
     
     function showOne(Model $instance, $code = 200)
     {
-        $transformer = $instance->transformer;
-        $instance = $this->transformData($instance, $transformer);
+       $transformer = $instance->transformer;
+       $instance = $this->transformData($instance, $transformer);
+
         return $this->successResponse(['data' => $instance], $code);
     }
 
@@ -41,28 +43,35 @@ trait ApiResponser
     {
         return $this->successResponse($message, $code);
     }
-    function paginateCollection(Collection $collection){
-        $rules = [
-            'por_pagina' => 'integer|min:2|max:50'
-        ];
 
-        Validator::validate(request()->all(),$rules);
+    function paginateCollection(Collection $collection)
+    {
+        $rules = [
+			'por_pagina' => 'integer|min:2|max:50'
+		];
+        Validator::validate(request()->all(), $rules);
+        
         $page = LengthAwarePaginator::resolveCurrentPage();
 
         $perPage = 20;
-        if (request()->has('por_pagina')){
-            $perPage = (int) request()->por_pagina;
-        }
-        $results = $collection->slice(($page - 1)* $perPage,$perPage)->values();
+        if (request()->has('por_pagina')) {
+			$perPage = (int) request()->por_pagina;
+		}
 
-        $paginated = new LengthAwarePaginator($results,$collection->count(),$perPage,$page,[
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-        ]);
+        $results = $collection->slice(($page - 1) * $perPage, $perPage)->values();
+
+        $paginated = new LengthAwarePaginator($results, $collection->count(), $perPage, $page, [
+			'path' => LengthAwarePaginator::resolveCurrentPath(),
+		]);
+
         $paginated->appends(request()->all());
         return $paginated;
     }
-    protected function transformData($data, $transformer) {
-        $transformation = fractal($data,new $transformer);
-        return $transformation->toArray();
-    }
+
+    protected function transformData($data, $transformer)
+	{
+		$transformation = fractal($data, new $transformer);
+
+		return $transformation->toArray();
+	}
 }

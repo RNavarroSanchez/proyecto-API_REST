@@ -37,7 +37,7 @@ class PrestamoController extends Controller
     public function show(Usuario $usuario)
 
     {
-        $prestamosporUsuario = $usuario-> with('libros')->wherehas('libros')->get()->find($usuario);
+        $prestamosporUsuario = $usuario-> with('libros')->wherehas('libros')->get();
         
 
         return $this->showAll($prestamosporUsuario);
