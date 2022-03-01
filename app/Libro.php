@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Usuario;
 use App\Transformers\LibroTransformer;
 use Illuminate\Database\Eloquent\Model;
 

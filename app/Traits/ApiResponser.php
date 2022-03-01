@@ -24,13 +24,15 @@ trait ApiResponser
         if($collection->isEmpty()) {
             return $this->successResponse(['data' => $collection], $code);
         }
+        
         $collection = $this->paginateCollection($collection);
         $transformer = $collection->first()->transformer;
         $collection = $this->transformData($collection, $transformer);
 
         return $this->successResponse(['data' => $collection], $code);
     }
-    
+   
+
     function showOne(Model $instance, $code = 200)
     {
        $transformer = $instance->transformer;
@@ -74,4 +76,5 @@ trait ApiResponser
 
 		return $transformation->toArray();
 	}
+    
 }

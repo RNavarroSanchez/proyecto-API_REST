@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('usuarios', 'Usuario\UsuarioController');
 Route::apiResource('libros','Libro\LibroController');
-Route::apiResource('libros.usuarios','Libro\LibroUsuarioController', ['only' => ['index','update','destroy']]);
-Route::apiResource('prestamos','Prestamo\PrestamoController',['only'=> ['index','show']]);
+Route::apiResource('libros.usuarios','Libro\LibroUsuarioController', ['only' => ['index','update']]);
+Route::apiResource('usuarios.libros','Usuario\UsuarioLibroController', ['only' => ['index','update','store','destroy']]);
+Route::apiResource('prestamos','Prestamo\PrestamoController',['only'=> 'index']);
 
 Route::group([
     'middleware' => 'api',

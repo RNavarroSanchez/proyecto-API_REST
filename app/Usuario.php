@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Libro;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Transformers\UsuarioTransformer;
 use Illuminate\Notifications\Notifiable;

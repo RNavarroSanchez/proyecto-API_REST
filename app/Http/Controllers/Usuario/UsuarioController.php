@@ -20,6 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        
         return $this->showAll(Usuario::all());
     }
 
@@ -82,7 +83,7 @@ class UsuarioController extends Controller
         $usuario->fill($validatedData);
 
         if(!$usuario->isDirty()){
-            return response()->json(['error'=>['code' => 422, 'message' => 'please specify at least one different value' ]], 422);
+            return response()->json(['error'=>['code' => 422, 'message' => 'Por favor indica otros campos' ]], 422);
         }
         $usuario->save();
         return $this->showOne($usuario);

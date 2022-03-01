@@ -21,25 +21,9 @@ class PrestamoController extends Controller
     public function index(Usuario $usuario)
     {
 
-       $prestamos = $usuario-> with('libros')->wherehas('libros')->get();
+       $prestamos = $usuario-> with('libros')->whereHas('libros')->get();
 
         return $this->showAll($prestamos);
        
-        
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show(Usuario $usuario)
-
-    {
-        $prestamosporUsuario = $usuario-> with('libros')->wherehas('libros')->get();
-        
-
-        return $this->showAll($prestamosporUsuario);
     }
 }
