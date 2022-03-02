@@ -15,7 +15,7 @@ class PrestamoController extends Controller
 
    /**
    
-    * @OA\Get(
+    * @OA\Get( 
     *    
     *     path="/api/prestamos",
     *     tags={"Prestamos"},

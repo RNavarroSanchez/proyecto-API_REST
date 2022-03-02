@@ -195,7 +195,7 @@
                 "tags": [
                     "Libros"
                 ],
-                "summary": "Añadir Usuario",
+                "summary": "Añadir Libro",
                 "operationId": "e2798d77c0ea0393430855825b008022",
                 "parameters": [
                     {
@@ -227,13 +227,13 @@
                 }
             }
         },
-        "/api/usuarios/{idLibro}": {
+        "/api/libros/{idLibro}": {
             "get": {
                 "tags": [
                     "Libros"
                 ],
                 "summary": "Mostrar un libro por su id",
-                "operationId": "25fb622426857416567b80c11fc9ed45",
+                "operationId": "245c374ed4b9ec1ad172efc5f9029e9d",
                 "parameters": [
                     {
                         "name": "idLibro",
@@ -259,7 +259,7 @@
                     "Libros"
                 ],
                 "summary": "Editar Libro",
-                "operationId": "31a4c5a8dd8bd1e9c12d63b06fb3e847",
+                "operationId": "50094fa17d2232baa45cdd18a91064dd",
                 "parameters": [
                     {
                         "name": "idLibro",
@@ -299,13 +299,13 @@
                 }
             }
         },
-        "/api/usuarios/{idlibro} ": {
+        "/api/libros/{idlibro} ": {
             "delete": {
                 "tags": [
                     "Libros"
                 ],
                 "summary": "Eliminar Libro",
-                "operationId": "6cc8870161c83ae57db742e35f1f3ef6",
+                "operationId": "2a20e9cf4a335656d59ca6950db66291",
                 "parameters": [
                     {
                         "name": "idLibro",
@@ -669,7 +669,7 @@
                     {
                         "name": "idLibro",
                         "in": "path",
-                        "description": "La id del libro a nodificar",
+                        "description": "La id del libro a borrar",
                         "required": true,
                         "schema": {
                             "type": "integer"

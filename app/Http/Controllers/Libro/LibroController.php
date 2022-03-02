@@ -39,7 +39,7 @@ class LibroController extends Controller
     * @OA\Post(
     *     path="/api/libros",
     *       tags={"Libros"},
-    *     summary="Añadir Usuario",
+    *     summary="Añadir Libro",
    *         @OA\Parameter(
      *         name="titulo",
      *         in="query",
@@ -69,7 +69,7 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'titulo' => 'required|max:255|unique:titulo',
+            'titulo' => 'required|max:255|unique:libros',
             'descripcion' => 'required|max:1000',
             
         ];
@@ -86,7 +86,7 @@ class LibroController extends Controller
    
     * @OA\Get(
     *    
-    *     path="/api/usuarios/{idLibro}",
+    *     path="/api/libros/{idLibro}",
     *     tags={"Libros"},
     *     summary="Mostrar un libro por su id",
     *        @OA\Parameter(
@@ -115,7 +115,7 @@ class LibroController extends Controller
 
    /**
     * @OA\Patch(
-    *     path="/api/usuarios/{idLibro}",
+    *     path="/api/libros/{idLibro}",
     *       tags={"Libros"},
     *     summary="Editar Libro",
     *          @OA\Parameter(
@@ -179,7 +179,7 @@ class LibroController extends Controller
 
       /**
     * @OA\Delete(
-    *     path="/api/usuarios/{idlibro} ",
+    *     path="/api/libros/{idlibro} ",
     *       tags={"Libros"},
     *     summary="Eliminar Libro",
     *          @OA\Parameter(
