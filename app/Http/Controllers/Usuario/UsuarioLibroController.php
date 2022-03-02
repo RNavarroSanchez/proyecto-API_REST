@@ -93,65 +93,7 @@ class UsuarioLibroController extends Controller
         
        return $this->showAll($usuario->libros);
     }
-        /**
-   
-    * @OA\Post(
-    *    
-    *     path="/api/usuarios/{idUsuario}/libros/{idLibro}",
-    *     tags={"Prestamos"},
-    *     summary="Añadir un libro a determinado usuario",
-    *        @OA\Parameter(
-     *         name="idUsuario",
-     *         in="path",
-     *         description="La id del usuario",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     ),
-     *           @OA\Parameter(
-     *         name="idLibro",
-     *         in="path",
-     *         description="La id del libro a nodificar",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     ),
-       *         @OA\Parameter(
-     *         name="libro_id",
-     *         in="query",
-     *         description="La Id del nuevo libro para prestado a usuario",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )),
-    *     @OA\Response(
-    *         response=200,
-    *         description="Mostrar todos los usuarios con libros."
-    *     ),
-    *     @OA\Response(
-    *         response="default",
-    *         description="Ha ocurrido un error."
-    *     )
-    * )
-    */
-    public function update(Request $request, Usuario $usuario, Libro $libro)
-    
-    {
-        $rules = [
-            'libro_id' => 'required|integer',
-        ];
-        $messages = [
-            'required' => 'El campo :attribute es obligatorio.',
-            'integer' => 'EL campo :attribute debe de ser un numero entero'
-        ];
-        $validatedData = $request->validate($rules, $messages);
-
-        $usuario->libros()->syncWithoutDetaching($validatedData);
-        return $this->showAll($usuario->libros());
-    }
-
+  
       /**
     * @OA\Delete(
     *    

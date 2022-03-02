@@ -610,7 +610,7 @@
                 "tags": [
                     "Prestamos"
                 ],
-                "summary": "Añadir un libro a determinado usuario",
+                "summary": "Actualizar un libro a determinado usuario",
                 "operationId": "202aa48594d95f0759d4c048b7d8435b",
                 "parameters": [
                     {
