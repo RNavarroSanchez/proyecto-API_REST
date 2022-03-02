@@ -606,50 +606,6 @@
             }
         },
         "/api/usuarios/{idUsuario}/libros/{idLibro}": {
-            "post": {
-                "tags": [
-                    "Prestamos"
-                ],
-                "summary": "Actualizar un libro a determinado usuario",
-                "operationId": "202aa48594d95f0759d4c048b7d8435b",
-                "parameters": [
-                    {
-                        "name": "idUsuario",
-                        "in": "path",
-                        "description": "La id del usuario",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "idLibro",
-                        "in": "path",
-                        "description": "La id del libro a nodificar",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "libro_id",
-                        "in": "query",
-                        "description": "La Id del nuevo libro para prestado a usuario",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los usuarios con libros."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "Prestamos"
