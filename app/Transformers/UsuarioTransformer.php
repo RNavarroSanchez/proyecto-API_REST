@@ -26,7 +26,7 @@ class UsuarioTransformer extends TransformerAbstract
     ];
     
     /**
-     * A Fractal transformer.
+     * A  transformer.
      *
      * @return array
      */
@@ -34,9 +34,11 @@ class UsuarioTransformer extends TransformerAbstract
     {
         return [
             'identificador' => (int)$usuario->id,
+            'nombre' => (string)$usuario->nombre,
             'correo' => (string)$usuario->email,
             'fechaCreacion' => (string)$usuario->created_at,
             'fechaActualizacion' => (string)$usuario->update_at,
+            'libros' => $usuario->libros,
             // 'links'=> [
             //     'rel' => 'self',
             //     'href' => route('usuarios.store', $usuario->id),
@@ -62,12 +64,16 @@ class UsuarioTransformer extends TransformerAbstract
             
         ];
     }
-    public static function originalAttribute($index, $attributes){
+    public static function originalAttribute($index){
         $attributes = [
             'identificador' => 'id',
+            'nombre'=> 'nombre',
             'correo' => 'email',
+            'contraseña_confirmation' => 'password_confirmation',
+            'contraseña' => 'password',
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
+            'libros' => 'libros',
             
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
@@ -76,8 +82,12 @@ class UsuarioTransformer extends TransformerAbstract
         $attributes = [
             'id' => 'identificador',
             'email' => 'correo',
+            'nombre'=> 'nombre',
+            'password' => 'contraseña',
+            'password_confirmation' => 'contraseña_confirmation',
             'created_at' => 'fechaCreacion', 
             'updated_at' => 'fechaActualizacion',
+            'libros' => 'libros',
             
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;

@@ -13,15 +13,27 @@ class PrestamoController extends Controller
     //     $this->middleware('transform.input'.UsuarioTransformer::class)->only(['store','update']);
     // }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   /**
+   
+    * @OA\Get(
+    *    
+    *     path="/api/prestamos",
+    *     tags={"Prestamos"},
+    *     summary="Mostrar todos los prestamos",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los prestamos."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index(Usuario $usuario)
     {
 
-       $prestamos = $usuario-> with('libros')->whereHas('libros')->get();
+       $prestamos = $usuario-> with('libros')->wherehas('libros')->get();
 
         return $this->showAll($prestamos);
        

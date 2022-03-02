@@ -34,6 +34,8 @@ class LibroTransformer extends TransformerAbstract
     {
         return [
             'identificador' => (int)$libro->id,
+            'titulo' => (string)$libro->titulo,
+            'descripcion' => (string)$libro->descripcion,
             'fechaCreacion' => (string)$libro->created_at,
             'fechaActualizacion' => (string)$libro->update_at,
             // 'links'=> [
@@ -61,4 +63,26 @@ class LibroTransformer extends TransformerAbstract
             
         ];
     }
-}
+    public static function originalAttribute($index){
+        $attributes = [
+            'identificador' => 'id',
+            'titulo'=> 'titulo',
+            'descripcion' => 'descripcion',
+            'fechaCreacion' => 'created_at',
+            'fechaActualizacion' => 'updated_at',
+            
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+    public static function transformedAttribute($index){
+        $attributes = [
+            'id' => 'identificador',
+            'titulo'=> 'titulo',
+            'descripcion' => 'descripcion',
+            'created_at' => 'fechaCreacion', 
+            'updated_at' => 'fechaActualizacion',
+            
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+ }

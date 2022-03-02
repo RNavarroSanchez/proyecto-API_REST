@@ -1,0 +1,690 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Biblioteca",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "UsuariosJWT"
+                ],
+                "summary": "Añadir Usuario",
+                "operationId": "5b1b8396e0f0688bc98f8183fce8e920",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "query",
+                        "description": "Nombre de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contraseña",
+                        "in": "query",
+                        "description": "Contraseña de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contraseña_confirmation",
+                        "in": "query",
+                        "description": "Confirmacion de Contraseña de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Añadir Usuario y te devuelve el usuario insertado."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "UsuariosJWT"
+                ],
+                "summary": "Logear Usuario",
+                "operationId": "0e84dcf529e9de27079b2baa9301088c",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email de usuario ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña de usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Devuelve Access Token"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/auth/profile": {
+            "get": {
+                "tags": [
+                    "UsuariosJWT"
+                ],
+                "summary": "Ver Perfil de Usuario por su token",
+                "operationId": "0c6539310310b555855677fca7183f7f",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Introducir el token precedido de Bearer ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Ver Perfil por token"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "UsuariosJWT"
+                ],
+                "summary": "Logout del Usuario",
+                "operationId": "2956ff1a61d616bdb3be1e1c19747fd4",
+                "responses": {
+                    "201": {
+                        "description": "Se sale de la sesion"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "UsuariosJWT"
+                ],
+                "summary": "Renovar token de Usuario",
+                "operationId": "5675cfcbb73fb2f76b3f1acd6aeefed0",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Introducir el token precedido de Bearer ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Ver token nuevo"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/libros": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Mostrar todos los libros",
+                "operationId": "5de8af456fc24b6be3c98332057468d3",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los libros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Añadir Usuario",
+                "operationId": "e2798d77c0ea0393430855825b008022",
+                "parameters": [
+                    {
+                        "name": "titulo",
+                        "in": "query",
+                        "description": "Titulo del libro nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "query",
+                        "description": "Descripcion del titulo nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Añadir Libro y te devuelve el libro insertado."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idLibro}": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Mostrar un libro por su id",
+                "operationId": "25fb622426857416567b80c11fc9ed45",
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un libro por su id."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Editar Libro",
+                "operationId": "31a4c5a8dd8bd1e9c12d63b06fb3e847",
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "titulo",
+                        "in": "query",
+                        "description": "Nuevo titulo de libro",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "query",
+                        "description": "Nueva descripcion del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Modificar un libro"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idlibro} ": {
+            "delete": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Eliminar Libro",
+                "operationId": "6cc8870161c83ae57db742e35f1f3ef6",
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Eliminar un libro por su Id y te muestra el libro borrado"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/libros/{idLibro}/usuarios": {
+            "get": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Mostrar todos los usuarios que tienen determinado libro",
+                "operationId": "a785f211cf6e49f2c42be9da866400a9",
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios con ese libro."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/prestamos": {
+            "get": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Mostrar todos los prestamos",
+                "operationId": "9a12ec233a283bef56c75936868ecd29",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los prestamos."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Mostrar todos los usuarios",
+                "operationId": "94dc27f677a70fac55451270f4b50765",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Añadir Usuario",
+                "operationId": "5ca59aa4a769ef25d650b9affdba01f8",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "query",
+                        "description": "Nombre de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "correo de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Confirmacion de Contraseña de usuario nuevo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Añadir Usuario y te devuelve el usuario insertado."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idusuario}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Mostrar un usuario por su id",
+                "operationId": "49b788d6df98082222c8d8ab10537a98",
+                "parameters": [
+                    {
+                        "name": "idusuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un usuario por su id."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Editar Usuario",
+                "operationId": "4571026da8144edbc2cb4864b1352595",
+                "parameters": [
+                    {
+                        "name": "idusuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "query",
+                        "description": "Nuevo nombre de usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Nuevo email de usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Modificar un usuario"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idusuario} ": {
+            "delete": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Eliminar Usuario",
+                "operationId": "8981f2aca6f9889a32864dbc3d5c5920",
+                "parameters": [
+                    {
+                        "name": "idusuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Eliminar un usuario por su Id y te muestra el usuario borrado"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idUsuario}/libros": {
+            "get": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Mostrar todos los libros que tiene determinado usuario",
+                "operationId": "4524370cd5ce286b9bb64f4c405abe02",
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los libros de ese usuario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Añadir un libro a determinado usuario",
+                "operationId": "fe243cac67ccfc832153b7c183ec5271",
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "libro_id",
+                        "in": "query",
+                        "description": "Id del libro prestado a usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios con libros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{idUsuario}/libros/{idLibro}": {
+            "post": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Añadir un libro a determinado usuario",
+                "operationId": "202aa48594d95f0759d4c048b7d8435b",
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro a nodificar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "libro_id",
+                        "in": "query",
+                        "description": "La Id del nuevo libro para prestado a usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios con libros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Borrar un libro a  un determinado usuario",
+                "operationId": "d9c64ac5f256e889e918d7adef6b12dd",
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "La id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "La id del libro a nodificar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios con libros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}

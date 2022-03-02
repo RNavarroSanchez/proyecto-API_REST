@@ -21,11 +21,55 @@ public function __construct()
 $this->middleware('auth:api', ['except' => ['login', 'register']]);
 }
 
-/**
-* Register a User.
-*
-* @return \Illuminate\Http\JsonResponse
-*/
+ /**
+    * @OA\Post(
+    *     path="/api/auth/register",
+    *       tags={"UsuariosJWT"},
+    *     summary="Añadir Usuario",
+   *         @OA\Parameter(
+     *         name="nombre",
+     *         in="query",
+     *         description="Nombre de usuario nuevo",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+     *        @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Email de usuario nuevo",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+     * @OA\Parameter(
+     *         name="contraseña",
+     *         in="query",
+     *         description="Contraseña de usuario nuevo",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     * @OA\Parameter(
+     *         name="contraseña_confirmation",
+     *         in="query",
+     *         description="Confirmacion de Contraseña de usuario nuevo",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+    *     @OA\Response(
+    *         response=201,
+    *         description="Añadir Usuario y te devuelve el usuario insertado."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
+
 public function register(Request $request)
 {
 $rules = [
@@ -44,11 +88,38 @@ $user = Usuario::create($validatedData);
 return $this->showOne($user,201);
 }
 
-  /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+   /**
+    * @OA\Post(
+    *     path="/api/auth/login",
+    *       tags={"UsuariosJWT"},
+    *     summary="Logear Usuario",
+     *        @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Email de usuario ",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+     * @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="Contraseña de usuario",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+    *     @OA\Response(
+    *         response=201,
+    *         description="Devuelve Access Token"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function login(Request $request)
     {
     	$validator = Validator::make($request->all(), [
@@ -67,21 +138,50 @@ return $this->showOne($user,201);
         return $this->createNewToken($token);
     }
 
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+     /**
+    * @OA\Get(
+    *     path="/api/auth/profile",
+    *       tags={"UsuariosJWT"},
+    *     summary="Ver Perfil de Usuario por su token",
+     *        @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="Introducir el token precedido de Bearer ",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+  
+    *     @OA\Response(
+    *         response=201,
+    *         description="Ver Perfil por token"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function profile()
     {
         return response()->json(auth()->user());
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+     /**
+    * @OA\Post(
+    *     path="/api/auth/logout",
+    *       tags={"UsuariosJWT"},
+    *     summary="Logout del Usuario",
+    *     @OA\Response(
+    *         response=201,
+    *         description="Se sale de la sesion"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function logout()
     {
         auth()->logout();
@@ -89,11 +189,30 @@ return $this->showOne($user,201);
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+   /**
+    * @OA\Post(
+    *     path="/api/auth/refresh",
+    *       tags={"UsuariosJWT"},
+    *     summary="Renovar token de Usuario",
+     *        @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="Introducir el token precedido de Bearer ",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
+  
+    *     @OA\Response(
+    *         response=201,
+    *         description="Ver token nuevo"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function refresh()
     {
         return $this->createNewToken(auth()->refresh());
