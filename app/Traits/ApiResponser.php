@@ -51,7 +51,13 @@ trait ApiResponser
         $rules = [
 			'por_pagina' => 'integer|min:2|max:50'
 		];
-        Validator::validate(request()->all(), $rules);
+        $message = [
+            'integer' => 'EL campo :attribute debe de ser un numero entero',
+            'min' => 'EL campo :attribute debe de ser un numero mayor o igual que dos',
+            'max' => 'EL campo :attribute debe de ser un numero menor o igual que cincuenta',
+        ];
+
+        Validator::validate(request()->all(), $rules,$message);
         
         $page = LengthAwarePaginator::resolveCurrentPage();
 

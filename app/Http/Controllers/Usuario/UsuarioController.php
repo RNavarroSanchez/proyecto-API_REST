@@ -92,7 +92,7 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'nombre' => 'required|max:255',
+            'nombre' => 'required|min:6|max:255',
             'email' => 'required|email|unique:usuarios,email',
             'password' => 'required|min:6|confirmed',
         ];
@@ -181,7 +181,7 @@ class UsuarioController extends Controller
     public function update(Request $request, Usuario $usuario)
     {
         $rules = [
-            'nombre' => 'min:5|max:255',
+            'nombre' => 'min:5|max:255|string',
             'email' => ['email', Rule::unique('usuarios')->ignore($usuario->id)],
             'password' => 'min:6', // si no hacemos ninguna validacion para este, debemos ponerle '' aunque sea para tenerlo disponible en la vista
         ];

@@ -172,6 +172,14 @@ return $this->showOne($user,201);
     *     path="/api/auth/logout",
     *       tags={"UsuariosJWT"},
     *     summary="Logout del Usuario",
+    *          @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="Introducir el token precedido de Bearer ",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )),
     *     @OA\Response(
     *         response=201,
     *         description="Se sale de la sesion"
@@ -182,6 +190,7 @@ return $this->showOne($user,201);
     *     )
     * )
     */
+    
     public function logout()
     {
         auth()->logout();

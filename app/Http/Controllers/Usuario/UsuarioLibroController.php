@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 class UsuarioLibroController extends Controller
 {
        /**
-   
     * @OA\Get(
     *    
     *     path="/api/usuarios/{idUsuario}/libros",
@@ -38,11 +37,13 @@ class UsuarioLibroController extends Controller
     public function index(Usuario $usuario)
     {
             $libros = $usuario->libros;
-         
+
+            if ($libros->isEmpty()){
+                return $this->errorResponse('Este usuario no tiene libros prestados',404);
+              }
+      
             return $this->showAll($libros);
     }
-
-
         /**
    
     * @OA\Post(
@@ -77,19 +78,22 @@ class UsuarioLibroController extends Controller
     *     )
     * )
     */
-    public function store(Request $request, Usuario $usuario)
+    public function store(Request $request, Usuario $usuario,Libro $libro)
     {
         $rules = [
-            'libro_id' => 'required|integer',
+            'libro_id' => 'required|integer|exists:libros,id',
         ];
         $messages = [
             'required' => 'El campo :attribute es obligatorio.',
-            'integer' => 'EL campo :attribute debe de ser un numero entero'
+            'integer' => 'EL campo :attribute debe de ser un numero entero',
+            'exists' => 'El id del libro no existe en la base de datos'
         ];
 
-        $validatedData = $request->validate($rules, $messages);
+            $validatedData = $request->validate($rules, $messages);
 
-            $usuario->libros()->attach($validatedData);   
+            $usuario->libros()->syncWithoutDetaching($validatedData);   
+         
+        
         
        return $this->showAll($usuario->libros);
     }
@@ -99,7 +103,7 @@ class UsuarioLibroController extends Controller
     *    
     *     path="/api/usuarios/{idUsuario}/libros/{idLibro}",
     *     tags={"Prestamos"},
-    *     summary="Borrar un libro a  un determinado usuario",
+    *     summary="Borrar un libro a un determinado usuario",
     *        @OA\Parameter(
      *         name="idUsuario",
      *         in="path",

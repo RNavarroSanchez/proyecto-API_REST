@@ -42,6 +42,10 @@ class LibroUsuarioController extends Controller
     public function index(Libro $libro)
     {
         $usuarios = $libro->usuarios;
+        if ($usuarios->isEmpty()){
+          return $this->errorResponse('Este libro no está prestado',404);
+        }
+
         return $this->showAll($usuarios);
     }
 }

@@ -137,6 +137,17 @@
                 ],
                 "summary": "Logout del Usuario",
                 "operationId": "2956ff1a61d616bdb3be1e1c19747fd4",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Introducir el token precedido de Bearer ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Se sale de la sesion"
@@ -610,7 +621,7 @@
                 "tags": [
                     "Prestamos"
                 ],
-                "summary": "Borrar un libro a  un determinado usuario",
+                "summary": "Borrar un libro a un determinado usuario",
                 "operationId": "d9c64ac5f256e889e918d7adef6b12dd",
                 "parameters": [
                     {
